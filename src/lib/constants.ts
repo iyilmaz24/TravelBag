@@ -1,4 +1,10 @@
-export const initialItems = [
+export interface Item {
+  id: number;
+  text: string;
+  packed: boolean;
+}
+
+export const initialItems: Item[] = [
   {
     id: 1,
     text: "Macbook",
@@ -16,7 +22,7 @@ export const initialItems = [
   },
 ];
 
-export const buttonsList = [
+export const buttonsList: string[] = [
   "Mark all as complete",
   "Mark all as incomplete",
   "Reset to initial",

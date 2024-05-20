@@ -14,7 +14,7 @@ export default function AddItemForm({ setItems }: AddItemFormProps) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!input) {
-      if (inputRef.current) inputRef.current.focus();
+      inputRef.current?.focus();
       return;
     }
     const newItem = {

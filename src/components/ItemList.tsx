@@ -1,12 +1,6 @@
-type itemsListProps = {
-  items: {
-    id: number;
-    text: string;
-    packed: boolean;
-  }[];
-};
+import { Item } from "../lib/constants";
 
-export default function ItemList({ items }: itemsListProps) {
+export default function ItemList({ items }: { items: Item[] }) {
   return (
     <ul>
       {items.map((item) => {
@@ -16,15 +10,7 @@ export default function ItemList({ items }: itemsListProps) {
   );
 }
 
-type ListItemProps = {
-  item: {
-    id: number;
-    text: string;
-    packed: boolean;
-  };
-};
-
-function ListItem({ item }: ListItemProps) {
+function ListItem({ item }: { item: Item }) {
   return (
     <li key={item.id} className="item">
       <label>
