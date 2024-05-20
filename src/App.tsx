@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackgroundHeading from "./components/BackgroundHeading";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ItemList from "./components/ItemList";
 import Sidebar from "./components/Sidebar";
-import { initialItems } from "./lib/constants";
+import { Item, initialItems } from "./lib/constants";
 
 function App() {
-  const [itemsList, setItemsList] = useState(initialItems);
+  const [itemsList, setItemsList] = useState(() => {
+    const list = JSON.parse(localStorage.getItem("itemsList"));
+    if (!list || list.length === 0) return initialItems;
+    return list;
+  });
 
   const handleAddItem = (input: string) => {
     const newItem = {
@@ -25,17 +29,17 @@ function App() {
     setItemsList(initialItems);
   };
   const handleMarkAllAsComplete = () => {
-    setItemsList(itemsList.map((item) => ({ ...item, packed: true })));
+    setItemsList(itemsList.map((item: Item) => ({ ...item, packed: true })));
   };
   const handleMarkAllAsIncomplete = () => {
-    setItemsList(itemsList.map((item) => ({ ...item, packed: false })));
+    setItemsList(itemsList.map((item: Item) => ({ ...item, packed: false })));
   };
   const handleDeleteItem = (id: number) => {
-    setItemsList(itemsList.filter((item) => item.id !== id));
+    setItemsList(itemsList.filter((item: Item) => item.id !== id));
   };
   const handleToggleItem = (id: number) => {
     setItemsList(
-      itemsList.map((item) => {
+      itemsList.map((item: Item) => {
         if (item.id === id) {
           return { ...item, packed: !item.packed };
         }
@@ -44,7 +48,12 @@ function App() {
     );
   };
 
-  const packedItemsCount = itemsList.filter((item) => item.packed).length;
+  const packedItemsCount = itemsList.filter((item: Item) => item.packed).length;
+
+  useEffect(() => {
+    localStorage.setItem("itemsList", JSON.stringify(itemsList));
+  }),
+    [itemsList];
 
   return (
     <>
