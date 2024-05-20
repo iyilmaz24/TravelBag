@@ -1,19 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Logo from "./Logo";
 import Counter from "./Counter";
+import { useItemsStore } from "../stores/itemsStore";
+import { Item } from "../lib/constants";
 
-type HeaderProps = {
-  totalItemsCount: number;
-  packedItemsCount: number;
-};
+export default function Header() {
+  const items: Item[] = useItemsStore((state: any) => state.items);
+  const packedItems: number = items.filter((item: Item) => item.packed).length;
 
-export default function Header({
-  totalItemsCount,
-  packedItemsCount,
-}: HeaderProps) {
   return (
     <header>
       <Logo />
-      <Counter totalItems={totalItemsCount} packedItems={packedItemsCount} />
+      <Counter totalItems={items.length} packedItems={packedItems} />
     </header>
   );
 }

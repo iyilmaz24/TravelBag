@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Item } from "../lib/constants";
 import EmptyView from "./EmptyView";
 import Select from "react-select";
 import { useMemo, useState } from "react";
+import { useItemsStore } from "../stores/itemsStore";
 
 const sortingOptions = [
   { label: "Sort by default", value: "name" },
@@ -9,17 +11,10 @@ const sortingOptions = [
   { label: "Sort by unpacked", value: "unpacked" },
 ];
 
-type ItemsListProps = {
-  items: Item[];
-  handleDeleteItem: (id: number) => void;
-  handleToggleItem: (id: number) => void;
-};
-
-export default function ItemList({
-  items,
-  handleDeleteItem,
-  handleToggleItem,
-}: ItemsListProps) {
+export default function ItemList() {
+  const items: Item[] = useItemsStore((state: any) => state.items);
+  const deleteItem = useItemsStore((state: any) => state.deleteItem);
+  const toggleItem = useItemsStore((state: any) => state.toggleItem);
   const [sortBy, setSortBy] = useState("default");
 
   const sortedItems: Item[] = useMemo(
@@ -54,8 +49,8 @@ export default function ItemList({
         return (
           <ListItem
             item={item}
-            onDeleteItem={handleDeleteItem}
-            onToggleItem={handleToggleItem}
+            onDeleteItem={deleteItem}
+            onToggleItem={toggleItem}
           ></ListItem>
         );
       })}
