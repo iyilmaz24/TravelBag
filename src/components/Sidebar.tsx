@@ -2,17 +2,30 @@ import AddItemForm from "./AddItemForm";
 import ButtonGroup from "./ButtonGroup";
 
 type SidebarProps = {
-  setItems: React.Dispatch<
-    React.SetStateAction<{ id: number; text: string; packed: boolean }[]>
-  >;
+  handleAddItem: (input: string) => void;
+  handleRemoveAllItems: () => void;
+  handleResetToInitial: () => void;
+  handleMarkAllAsComplete: () => void;
+  handleMarkAllAsIncomplete: () => void;
 };
 
-export default function Sidebar({ setItems }: SidebarProps) {
+export default function Sidebar({
+  handleAddItem,
+  handleRemoveAllItems,
+  handleResetToInitial,
+  handleMarkAllAsComplete,
+  handleMarkAllAsIncomplete,
+}: SidebarProps) {
   return (
     <div className="sidebar">
-      <AddItemForm setItems={setItems}></AddItemForm>
+      <AddItemForm onAddItem={handleAddItem}></AddItemForm>
 
-      <ButtonGroup></ButtonGroup>
+      <ButtonGroup
+        onRemoveAllItems={handleRemoveAllItems}
+        onResetToInitial={handleResetToInitial}
+        onMarkAllAsComplete={handleMarkAllAsComplete}
+        onMarkAllAsIncomplete={handleMarkAllAsIncomplete}
+      ></ButtonGroup>
     </div>
   );
 }

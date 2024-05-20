@@ -1,7 +1,12 @@
-export default function Counter() {
+type CounterProps = {
+  totalItems: number;
+  packedItems: number;
+};
+
+export default function Counter({ totalItems, packedItems }: CounterProps) {
   return (
     <div>
-      <b>6 </b>/ 10 items packed
+      <b>{packedItems}</b> / {totalItems} items packed
     </div>
   );
 }

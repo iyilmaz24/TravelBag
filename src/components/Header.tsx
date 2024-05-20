@@ -1,11 +1,19 @@
 import Logo from "./Logo";
 import Counter from "./Counter";
 
-export default function Header() {
+type HeaderProps = {
+  totalItemsCount: number;
+  packedItemsCount: number;
+};
+
+export default function Header({
+  totalItemsCount,
+  packedItemsCount,
+}: HeaderProps) {
   return (
     <header>
       <Logo />
-      <Counter />
+      <Counter totalItems={totalItemsCount} packedItems={packedItemsCount} />
     </header>
   );
 }

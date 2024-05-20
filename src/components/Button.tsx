@@ -1,14 +1,14 @@
 type ButtonProps = {
   text: string;
   secondary: boolean;
-  eventHandler?: () => void;
+  onClick?: () => void;
 };
 
-export default function Button({ text, secondary, eventHandler }: ButtonProps) {
+export default function Button({ text, secondary, onClick }: ButtonProps) {
   return (
     <button
       className={`btn ${secondary ? "btn--secondary" : ""}`}
-      onClick={eventHandler}
+      onClick={onClick}
     >
       {text}
     </button>

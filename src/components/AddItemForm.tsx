@@ -2,12 +2,10 @@ import Button from "./Button";
 import { FormEvent, useRef, useState } from "react";
 
 type AddItemFormProps = {
-  setItems: React.Dispatch<
-    React.SetStateAction<{ id: number; text: string; packed: boolean }[]>
-  >;
+  onAddItem: (input: string) => void;
 };
 
-export default function AddItemForm({ setItems }: AddItemFormProps) {
+export default function AddItemForm({ onAddItem }: AddItemFormProps) {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -17,12 +15,8 @@ export default function AddItemForm({ setItems }: AddItemFormProps) {
       inputRef.current?.focus();
       return;
     }
-    const newItem = {
-      id: new Date().getTime(),
-      text: input,
-      packed: false,
-    };
-    setItems((prev) => [...prev, newItem]);
+
+    onAddItem(input);
     setInput("");
   };
 
