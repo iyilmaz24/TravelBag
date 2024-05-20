@@ -32,7 +32,11 @@ export default function AddItemForm({ onAddItem }: AddItemFormProps) {
         type="text"
         autoFocus
       />
-      <Button text={"Add to List"} secondary={false}></Button>
+      <Button
+        text={"Add to List"}
+        secondary={false}
+        onClick={() => {}}
+      ></Button>
     </form>
   );
 }

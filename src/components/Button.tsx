@@ -1,7 +1,7 @@
 type ButtonProps = {
   text: string;
   secondary: boolean;
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 export default function Button({ text, secondary, onClick }: ButtonProps) {
