@@ -15,12 +15,12 @@ export default function ButtonGroup() {
   return (
     <section className="button-group">
       <Button
-        text={"Mark all as complete"}
+        text={"Mark all as packed"}
         secondary={true}
         onClick={markAllAsComplete}
       ></Button>
       <Button
-        text={"Mark all as incomplete"}
+        text={"Mark all as unpacked"}
         secondary={true}
         onClick={markAllAsIncomplete}
       ></Button>
